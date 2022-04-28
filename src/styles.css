@@ -1,0 +1,10 @@
+.App {
+    font-family: sans-serif;
+    text-align: center;
+  }
+  
+
+
+span[class^='image-map__map'], div[class*=' image-map__map']{
+  background: rgba(255, 53, 184, 0.4);
+}
