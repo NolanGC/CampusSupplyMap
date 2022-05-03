@@ -16,7 +16,7 @@ export default function ChakraAlert (props) {
   alignItems='center'
   justifyContent='center'
   textAlign='center'
-  height='160px'
+  height='150px'
   colorScheme='pink'
 >
   <AlertIcon boxSize='40px' mr={0} />
@@ -38,7 +38,7 @@ export default function ChakraAlert (props) {
           alignItems='center'
           justifyContent='center'
           textAlign='center'
-          height='160px'
+          height='150px'
           colorScheme='pink'
           >
           <ArrowDownIcon boxSize='60px' mr={0} />
