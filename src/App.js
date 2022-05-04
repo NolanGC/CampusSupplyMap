@@ -16,6 +16,8 @@ import {
   Alert,
   Image
 } from '@chakra-ui/react'
+import { getDatabase, ref, onValue} from "firebase/database";
+
 
 export default function Example() {
 
@@ -25,23 +27,25 @@ export default function Example() {
   const [title, setTitle] = useState("");
   const [display, setDisplay] = useState(false);
 
+
+
   useEffect(() => {
-    onSnapshot(doc(db,'rooms', "Sgf8Tm1RSckE20WMtigL"),(snapshot)=>{
-      let data = snapshot.data();
-      let keys = Object.keys(data);
-      let dataArray = [];
+    const supplyRef = ref(db, '1YubLsEO-7GnMMzGAD8BG8bpd1jB25N35-w_PxSO-aMs/Sheet1');
+    onValue(supplyRef, (snapshot) => {
       let stockedArray = [];
-      for (const key of keys){
-        dataArray.push({id:key, ...data[key]})
-        stockedArray.push(key)
+      let dataArray = [];
+      const data = snapshot.val();
+      data.shift();
+      for(const entry of data){
+        stockedArray.push(entry['Room'])
       }
-      setRooms(dataArray);
-      setStocked(stockedArray);
-    })
+      setRooms(data)
+      setStocked(stockedArray)
+    });
   },[display]);
   function getMapAreas(){
     let allAreas = mapArea;
-    let valid = allAreas.filter((element, index) => stocked.includes(""+roomMap[index+1]))
+    let valid = allAreas.filter((element, index) => stocked.includes(roomMap[index+1]))
     return valid
   }
   function getNumber(element) {
@@ -51,10 +55,8 @@ export default function Example() {
     let message = ""
     let roomNumber = getNumber(element)
     for(const room of rooms){
-      if(room['id'] == roomNumber){
-        message += room['description']
-        message += room['type']
-        break;
+      if(room['Room'] == roomNumber){
+        message += room['Pads']
       }
     }
     return message
