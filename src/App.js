@@ -62,28 +62,22 @@ export default function Example() {
     return message
   }
 
-  const ImageMapComponent = React.useMemo(
-    () => (
-      <div>
-          <Stack spacing={0}>
-          <Image src={banner} alt="banner" width="100%" height="100%" />
-          <ChakraAlert message={message} title={title} display={display}></ChakraAlert>
-          <ImageMap
-              className="usage-map"
-              src={map}
-              map={getMapAreas()}
-              onMapClick={(element, index) => {
-                setDisplay(true)
-                setMessage(getMessage(element))
-                setTitle("Room " + getNumber(element) + " is in stock!")
-              }}
-            />
-            <Image src={bannerb} alt="banner" width="100%" height="100%" />
-            <InfoButton ></InfoButton>
-          </Stack>
-      </div>
-    ),
-    [rooms, message]
-  );
-  return <div>{ImageMapComponent}</div>;
+  return <div>
+      <Stack spacing={0}>
+      <Image src={banner} alt="banner" width="100%" height="100%" />
+      <ChakraAlert message={message} title={title} display={display}></ChakraAlert>
+      <ImageMap
+          className="usage-map"
+          src={map}
+          map={getMapAreas()}
+          onMapClick={(element, index) => {
+            setDisplay(true)
+            setMessage(getMessage(element))
+            setTitle("Room " + getNumber(element) + " is in stock!")
+          }}
+        />
+        <Image src={bannerb} alt="banner" width="100%" height="100%" />
+        <InfoButton ></InfoButton>
+      </Stack>
+  </div>;
 }
