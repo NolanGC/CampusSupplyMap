@@ -97,7 +97,7 @@ export default function Example() {
           onMapClick={(element, index) => {
             setDisplay(true)
             setMessage(getMessage(element))
-            setTitle("Room " + getNumber(element) + " is in stock!")
+            setTitle("Room " + getNumber(element) + " has " + mode + "!")
           }}
         />
 
