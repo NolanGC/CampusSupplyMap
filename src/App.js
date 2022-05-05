@@ -13,7 +13,7 @@ import { ImageMap } from "@qiuz/react-image-map";
 import CustomAlert from './components/alert.js';
 import RequestButton from './components/RequestButton'
 import InfoButton from "./components/InfoButton";
-import {  extendTheme, ChakraProvider, Stack, Switch, Alert, Image, Text, FormControl, FormLabel, Flex } from '@chakra-ui/react'
+import {  extendTheme, ChakraProvider, Stack, Switch, Button, Alert, Image, Grid, GridItem, Text, FormControl, FormLabel, Flex, Box, SimpleGrid } from '@chakra-ui/react'
 
 import db from './firebase';
 import { getDatabase, ref, onValue} from "firebase/database";
@@ -26,7 +26,7 @@ export default function Example() {
   const [message, setMessage] = useState("");
   const [title, setTitle] = useState("");
   const [display, setDisplay] = useState(false);
-  const [mode, setMode] = useState(true) // true = periodcare, false = clothes
+  const [mode, setMode] = useState("") // true = periodcare, false = clothes
 
   useEffect(() => {
     const supplyRef = ref(db, '1YubLsEO-7GnMMzGAD8BG8bpd1jB25N35-w_PxSO-aMs/Sheet1');
@@ -50,20 +50,15 @@ export default function Example() {
       let num = getNumber(area)
       let room = getRoom(num)
       // looking for period care
-      if(mode){
-        if(room['Tampons'] === 1 || room['Pads'] === 1 || room['Liners'] === 1){
-          let copy = area;
-          copy["style"] = { background: 'rgba(255, 53, 184, 0.4)' };
-          final.push(copy)
-        }
-      }
-      // looking for extra clothes
-      else{
-        if(room['Hairties'] === 1 || room['Underwear'] === 1 || room['Sweatpants'] === 1){
-          let copy = area;
+      if(room[mode] === 1){
+        let copy = area;
+        if(mode === "Sweatpants" || mode === "Hairties" || mode === "Underwear"){
           copy["style"] = { background: 'rgba(191, 85, 236, 0.4)' };
-          final.push(copy)
         }
+        else{
+          copy["style"] = { background: 'rgba(255, 53, 184, 0.4)' };
+        }
+        final.push(copy)
       }
     }
     return final
@@ -90,11 +85,8 @@ export default function Example() {
     }
     return message.substring(0, message.length-2)
   }
-  function toggleMode(){
-    setMode(!mode)
-  }
 
-  return <div>
+  return <Box>
       <Stack spacing={0}>
       <Image src={topBanner} alt="banner" width="100%" height="100%" />
       <CustomAlert message={message} title={title} display={display}></CustomAlert>
@@ -109,23 +101,33 @@ export default function Example() {
           }}
         />
 
-        <Flex bg='red' maxW="100%">
-          <Image flex={4} w="80%" src={bottomBanner} />
-          <RequestButton flex={2}/>
+        <Flex bg='red' maxW="56%">
+          <Image flex={2} src={bottomBanner} />
+          <RequestButton flex={1}/>
         </Flex>
 
         <InfoButton/>
       </Stack>
+        <Grid position='absolute' left='15%' top='68%' templateColumns='repeat(3, 1fr)' columns={3} gap={0}>
+          <GridItem >
+            <Button fontSize='12' onClick={()=>setMode('Tampons')} maxHeight='80%'colorScheme='pink'>Tampons</Button>
+          </GridItem>
+          <GridItem>
+            <Button fontSize='12' onClick={()=>setMode('Pads')} minW='90' maxHeight='80%'colorScheme='pink'>Pads</Button>
+          </GridItem>
+          <GridItem>
+            <Button fontSize='12' onClick={()=>setMode('Liners')} minW='90' maxHeight='80%'colorScheme='pink'>Liners</Button>
+          </GridItem>
+          <GridItem>
+            <Button fontSize='12' onClick={()=>setMode('Hairties')} maxHeight='80%'colorScheme='purple'>Hairties</Button>
+          </GridItem>
+          <GridItem>
+            <Button fontSize='12' onClick={()=>setMode('Underwear')} maxHeight='80%'colorScheme='purple'>Underwear</Button>
+          </GridItem>
+          <GridItem>
+            <Button fontSize='12' onClick={()=>setMode('Sweatpants')} maxHeight='80%'colorScheme='purple'>Sweatpants</Button>
+          </GridItem>
+        </Grid>
 
-      <FormControl top="72%" left="17%" position="absolute" display='flex' alignItems='center'>
-        <FormLabel  mb='0'>
-          Extra Clothes
-        </FormLabel>
-        <Switch colorScheme='pink' defaultIsChecked="true" onChange={toggleMode} ></Switch>
-        <FormLabel  mb='0' ml="3">
-          Period Care
-        </FormLabel>
-      </FormControl>
-
-  </div>;
+  </Box>;
 }

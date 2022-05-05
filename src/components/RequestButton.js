@@ -11,7 +11,7 @@ export default function RequestButton ({flex}) {
     return (
         <Box flex={flex} >
             <Link href='https://www.google.com'>
-            <Button w="100%" height="100%" leftIcon={<RepeatIcon />} rightIcon={<RepeatIcon />} colorScheme='pink' variant='solid'>
+            <Button w="100%" height="100%" leftIcon={<RepeatIcon />} rightIcon={<RepeatIcon />} colorScheme='pink' variant='ghost'>
               Request Refill
             </Button>
         </Link>
