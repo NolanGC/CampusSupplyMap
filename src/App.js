@@ -26,7 +26,7 @@ export default function Example() {
   const [message, setMessage] = useState("");
   const [title, setTitle] = useState("");
   const [display, setDisplay] = useState(false);
-  const [mode, setMode] = useState("") // true = periodcare, false = clothes
+  const [mode, setMode] = useState("Tampons") // true = periodcare, false = clothes
 
   useEffect(() => {
     const supplyRef = ref(db, '1YubLsEO-7GnMMzGAD8BG8bpd1jB25N35-w_PxSO-aMs/Sheet1');
@@ -108,7 +108,7 @@ export default function Example() {
 
         <InfoButton/>
       </Stack>
-        <Grid position='absolute' left='13%' top='72%' templateColumns='repeat(3, 1fr)' columns={3} gap={0}>
+        <Grid position='absolute' left='13%' top='70%' templateColumns='repeat(3, 1fr)' columns={3} gap={0}>
           <GridItem >
             <Button fontSize='12' onClick={()=>setMode('Tampons')} maxHeight='80%'colorScheme='pink'>Tampons</Button>
           </GridItem>
