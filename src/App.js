@@ -108,7 +108,7 @@ export default function Example() {
 
         <InfoButton/>
       </Stack>
-        <Grid position='absolute' left='15%' top='68%' templateColumns='repeat(3, 1fr)' columns={3} gap={0}>
+        <Grid position='absolute' left='13%' top='72%' templateColumns='repeat(3, 1fr)' columns={3} gap={0}>
           <GridItem >
             <Button fontSize='12' onClick={()=>setMode('Tampons')} maxHeight='80%'colorScheme='pink'>Tampons</Button>
           </GridItem>
