@@ -6,7 +6,7 @@ import {
   } from '@chakra-ui/react'
   import { ArrowDownIcon } from '@chakra-ui/icons'
 
-export default function ChakraAlert (props) {
+export default function CustomAlert (props) {
     if(props.display){
         return (
             <Alert
@@ -51,5 +51,5 @@ export default function ChakraAlert (props) {
         </Alert>
       )
     }
-    
+
 }
